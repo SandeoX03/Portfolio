@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { personalInfo, heroContent } from "../data/portfolio";
+import heroWave from "../assets/hero-wave.jpg";
 
 export default function Home() {
   const scrollToWork = () => {
@@ -8,11 +9,20 @@ export default function Home() {
 
   return (
     <section id="home" className="relative min-h-[100svh] flex items-center pt-24 pb-16 overflow-hidden">
-      {/* Subtle ambient backdrop glows */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-[128px] pointer-events-none -z-10" />
-      <div className="absolute top-1/3 right-10 w-80 h-80 bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none -z-10" />
+      {/* Wave pattern background image with blend mode */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        <img
+          src={heroWave}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-25 object-center pointer-events-none"
+        />
+      </div>
 
-      <div className="mx-auto w-full max-w-5xl px-5 sm:px-8 min-w-0">
+      {/* Subtle ambient backdrop glows */}
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-[128px] pointer-events-none z-0" />
+      <div className="absolute top-1/3 right-10 w-80 h-80 bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none z-0" />
+
+      <div className="mx-auto w-full max-w-5xl px-5 sm:px-8 min-w-0 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
