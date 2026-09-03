@@ -5,26 +5,26 @@ export const personalInfo = {
   location: "Kathmandu, Bagmati, Nepal",
   email: "sushanttandukar52@gmail.com",
   linkedin: "https://linkedin.com/in/sushant-tandukar",
-  github: "https://github.com/sushant-tandukar",
+  github: "https://github.com/SandeoX03",
   tagline:
-    "Building secure, cloud-native solutions at the intersection of cybersecurity and modern computing.",
+    "Computer Science student focused on cybersecurity, AWS cloud, and how systems actually hold up.",
 };
 
 export const heroContent = {
-  greeting: "Hello, I'm",
-  headline: "Securing the digital frontier, one line of code at a time.",
+  greeting: "Hi, I'm",
+  headline: "Sushant Tandukar.",
   description:
-    "I'm a Computer Science undergraduate at Taylor's University with a passion for cybersecurity, AWS cloud architecture, and analytical problem-solving. From managing robotics club communications to earning Dean's List honors — I bring dedication, curiosity, and a drive to make technology safer for everyone.",
-  cta: "Explore my journey",
+    "Computer Science student at Taylor's University. I work on cybersecurity, AWS cloud architecture, and practical problem-solving — from infrastructure labs to security challenges.",
+  cta: "View my work",
 };
 
 export const aboutContent = {
   intro:
-    "I'm Sushant Tandukar — a cybersecurity-focused Computer Science student who believes that great technology starts with security at its core. Currently pursuing my Bachelor's at Taylor's University, I'm building a foundation that spans cloud infrastructure, threat analysis, and enterprise-level design thinking.",
+    "I'm a cybersecurity-focused Computer Science student at Taylor's University. I care about how systems are built, how they fail, and how to make them harder to break.",
   story: [
-    "My journey began in Kathmandu, where curiosity about how systems work led me to robotics and technology clubs in high school. As Social Media Manager for the V.S. Niketan Robotics Club, I learned to communicate complex ideas clearly — a skill that translates directly into documenting security findings and cloud architectures today.",
-    "At Taylor's University, I've consistently pushed myself academically, earning Dean's List recognition in both the September 2024 and May 2025 semesters. Beyond grades, I'm actively stacking hands-on certifications in AWS, AI literacy, and enterprise design thinking to stay ahead in a rapidly evolving field.",
-    "What drives me is the challenge of protecting what matters. Whether it's completing Advent of Cyber challenges, deploying AWS infrastructure, or leading student initiatives — I approach every problem analytically, methodically, and with a security-first mindset.",
+    "I grew up in Kathmandu, where curiosity about how systems work led me into robotics and technology clubs in high school. As Social Media Manager for the V.S. Niketan Robotics Club, I learned to explain technical work clearly — something I still rely on when documenting security findings and cloud setups.",
+    "At Taylor's, I've stayed close to the work: Dean's List in the September 2024 and May 2025 semesters, plus hands-on certifications in AWS, AI literacy, and enterprise design thinking.",
+    "What I enjoy most is the problem itself — Advent of Cyber challenges, AWS infrastructure, student initiatives. I try to work analytically, methodically, and with security in mind from the start.",
   ],
   highlights: [
     { label: "Dean's List", value: "2× Semesters" },
@@ -154,12 +154,19 @@ export const honors = [
 ];
 
 export const navLinks = [
-  { id: "home", label: "Home" },
+  { id: "projects", label: "Work" },
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "education", label: "Education" },
-  { id: "certificates", label: "Certificates" },
   { id: "contact", label: "Contact" },
 ];
+
+export const sectionNavMap: Record<string, string> = {
+  home: "home",
+  projects: "projects",
+  about: "about",
+  skills: "skills",
+  experience: "projects",
+  education: "about",
+  certificates: "about",
+  contact: "contact",
+};

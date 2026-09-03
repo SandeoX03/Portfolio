@@ -1,70 +1,53 @@
 import { motion } from "framer-motion";
-import { FaAward } from "react-icons/fa";
 import SectionWrapper, { SectionHeading } from "./SectionWrapper";
 import { aboutContent, honors } from "../data/portfolio";
 
 export default function About() {
   return (
-    <SectionWrapper id="about" className="section-alt">
-      <SectionHeading
-        label="About Me"
-        title="Passionate about security, driven by curiosity"
-        description="Get to know the person behind the code — my story, values, and what fuels my work in cybersecurity and cloud computing."
-      />
+    <SectionWrapper id="about" className="border-t border-[var(--color-line)]">
+      <SectionHeading label="About" title="A bit about me" />
 
-      <div className="grid lg:grid-cols-5 gap-12 items-start">
-        <div className="lg:col-span-3 space-y-6">
-          <p className="text-lg text-[#1e293b] leading-relaxed font-medium">{aboutContent.intro}</p>
+      <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 min-w-0">
+        <div className="lg:col-span-7 space-y-5 min-w-0">
+          <p className="text-[var(--color-ink)] text-lg leading-relaxed font-serif">
+            {aboutContent.intro}
+          </p>
 
           {aboutContent.story.map((paragraph, i) => (
             <motion.p
               key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.5 }}
-              className="text-[#475569] leading-relaxed"
+              transition={{ delay: i * 0.08, duration: 0.4 }}
+              className="text-[var(--color-ink-2)] leading-relaxed"
             >
               {paragraph}
             </motion.p>
           ))}
         </div>
 
-        <div className="lg:col-span-2 space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            {aboutContent.highlights.map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="card p-5 text-center"
-              >
-                <p className="text-2xl font-bold gradient-text mb-1">{item.value}</p>
-                <p className="text-xs text-[#64748b] uppercase tracking-wider font-medium">
-                  {item.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="card p-6">
-            <div className="flex items-center gap-2.5 mb-5">
-              <div className="icon-box h-9 w-9">
-                <FaAward size={16} />
+        <div className="lg:col-span-5 min-w-0">
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-8 mb-12">
+            {aboutContent.highlights.map((item) => (
+              <div key={item.label}>
+                <dt className="label-text mb-1">{item.label}</dt>
+                <dd className="font-serif text-lg text-[var(--color-ink)]">{item.value}</dd>
               </div>
-              <h3 className="font-semibold text-[#0f172a]">Honors & Awards</h3>
-            </div>
-            <ul className="space-y-3">
-              {honors.map((honor) => (
-                <li key={honor} className="flex items-start gap-2.5 text-sm text-[#475569]">
-                  <span className="text-[#1e40af] mt-0.5 shrink-0 font-bold">•</span>
-                  {honor}
-                </li>
-              ))}
-            </ul>
-          </div>
+            ))}
+          </dl>
+
+          <p className="label-text mb-4">Honors</p>
+          <ul className="space-y-3">
+            {honors.map((honor) => (
+              <li
+                key={honor}
+                className="text-sm text-[var(--color-ink-2)] leading-relaxed pl-3 border-l border-[var(--color-line)]"
+              >
+                {honor}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </SectionWrapper>

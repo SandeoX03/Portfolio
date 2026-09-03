@@ -1,58 +1,65 @@
 import { motion } from "framer-motion";
-import { HiExternalLink } from "react-icons/hi";
 import SectionWrapper, { SectionHeading } from "./SectionWrapper";
 import { projects } from "../data/portfolio";
 
+function hasRealLink(link: string) {
+  return Boolean(link) && link !== "#";
+}
+
 export default function Projects() {
   return (
-    <SectionWrapper id="projects" className="section-alt">
+    <SectionWrapper id="projects" className="border-t border-[var(--color-line)]">
       <SectionHeading
-        label="Projects"
-        title="Things I've built & explored"
-        description="From cloud infrastructure labs to cybersecurity challenges — hands-on work that sharpens my skills and deepens my understanding."
+        label="Work"
+        title="Selected projects"
+        description="Labs, challenges, and student work I've actually spent time on."
       />
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
         {projects.map((project, i) => (
           <motion.article
             key={project.title}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="card p-6 flex flex-col group"
+            transition={{ duration: 0.4, delay: i * 0.04 }}
+            className="grid md:grid-cols-12 gap-6 md:gap-10 py-10 md:py-14 min-w-0"
           >
-            <div className="flex items-start justify-between gap-4 mb-4">
-              <h3 className="text-xl font-semibold text-[#0f172a] group-hover:text-[#1e40af] transition-colors">
-                {project.title}
-              </h3>
-              <span
-                className={
-                  project.status === "Completed" ? "badge-success" : "badge-pending"
-                }
-              >
-                {project.status}
-              </span>
-            </div>
-
-            <p className="text-[#475569] text-sm leading-relaxed mb-5 flex-grow">
-              {project.description}
-            </p>
-
-            <div className="flex flex-wrap gap-2 mb-5">
-              {project.tags.map((tag) => (
-                <span key={tag} className="tag !text-xs">
-                  {tag}
+            <div className="md:col-span-5 min-w-0">
+              <div className="aspect-[16/10] w-full border border-[var(--color-line)] bg-[var(--color-bg-alt)] flex items-end p-5 sm:p-6">
+                <span className="font-serif text-4xl md:text-5xl text-[var(--color-ink)]/20 leading-none">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-              ))}
+              </div>
             </div>
 
-            <a
-              href={project.link}
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#64748b] hover:text-[#1e40af] transition-colors mt-auto"
-            >
-              View details <HiExternalLink size={14} />
-            </a>
+            <div className="md:col-span-7 flex flex-col min-w-0">
+              <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+                <h3 className="font-serif text-xl md:text-2xl text-[var(--color-ink)] leading-snug">
+                  {project.title}
+                </h3>
+                <span className="badge-pending shrink-0">{project.status}</span>
+              </div>
+
+              <p className="text-[var(--color-ink-2)] text-[0.9375rem] leading-relaxed mb-5">
+                {project.description}
+              </p>
+
+              <p className="tag mb-6">
+                {project.tags.join(" · ")}
+              </p>
+
+              {hasRealLink(project.link) && (
+                <a
+                  href={project.link}
+                  className="text-link text-sm w-fit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View project ↗
+                </a>
+              )}
+            </div>
           </motion.article>
         ))}
       </div>

@@ -1,46 +1,26 @@
-import { motion } from "framer-motion";
-import { HiAcademicCap } from "react-icons/hi";
 import SectionWrapper, { SectionHeading } from "./SectionWrapper";
 import { education } from "../data/portfolio";
 
 export default function Education() {
   return (
-    <SectionWrapper id="education" className="section-alt">
-      <SectionHeading
-        label="Education"
-        title="Academic foundation"
-        description="Formal education that builds the theoretical and practical backbone of my cybersecurity and computer science journey."
-      />
+    <SectionWrapper id="education" className="border-t border-[var(--color-line)]">
+      <SectionHeading label="Education" title="Studies" />
 
-      <div className="space-y-6">
-        {education.map((edu, i) => (
-          <motion.div
+      <div className="space-y-10">
+        {education.map((edu) => (
+          <article
             key={edu.institution}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="card p-6 md:p-8"
+            className="grid md:grid-cols-12 gap-4 md:gap-8 min-w-0"
           >
-            <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="icon-box h-14 w-14 shrink-0">
-                <HiAcademicCap size={28} />
-              </div>
-
-              <div className="flex-grow">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#0f172a]">{edu.institution}</h3>
-                    <p className="text-[#1e40af] mt-1 font-medium">{edu.degree}</p>
-                  </div>
-                  <p className="font-mono text-sm text-[#64748b] whitespace-nowrap bg-[#f8fafc] px-3 py-1 rounded-lg border border-[#e2e8f0]">
-                    {edu.period}
-                  </p>
-                </div>
-                <p className="text-[#475569] text-sm mt-4 leading-relaxed">{edu.details}</p>
-              </div>
+            <div className="md:col-span-4">
+              <p className="font-mono text-xs text-[var(--color-ink-3)]">{edu.period}</p>
             </div>
-          </motion.div>
+            <div className="md:col-span-8">
+              <h3 className="font-serif text-xl text-[var(--color-ink)]">{edu.institution}</h3>
+              <p className="text-sm text-[var(--color-ink-2)] mt-1 mb-3">{edu.degree}</p>
+              <p className="text-sm text-[var(--color-ink-2)] leading-relaxed">{edu.details}</p>
+            </div>
+          </article>
         ))}
       </div>
     </SectionWrapper>

@@ -9,13 +9,13 @@ interface SectionWrapperProps {
 
 export default function SectionWrapper({ id, children, className = "" }: SectionWrapperProps) {
   return (
-    <section id={id} className={`relative px-6 py-24 ${className}`}>
+    <section id={id} className={`relative px-5 sm:px-8 py-20 md:py-28 ${className}`}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="mx-auto max-w-6xl"
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="mx-auto w-full max-w-5xl min-w-0"
       >
         {children}
       </motion.div>
@@ -33,13 +33,16 @@ export function SectionHeading({
   description?: string;
 }) {
   return (
-    <div className="mb-16">
+    <div className="mb-12 md:mb-16 max-w-2xl min-w-0">
       <p className="label-text mb-3">{label}</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-[#0f172a] tracking-tight mb-4">{title}</h2>
+      <h2 className="font-serif text-[1.75rem] md:text-4xl font-medium tracking-tight text-[var(--color-ink)] leading-snug">
+        {title}
+      </h2>
       {description && (
-        <p className="text-[#475569] max-w-2xl text-lg leading-relaxed">{description}</p>
+        <p className="mt-4 text-[var(--color-ink-2)] leading-relaxed text-[0.975rem] md:text-base">
+          {description}
+        </p>
       )}
-      <div className="accent-line mt-6" />
     </div>
   );
 }

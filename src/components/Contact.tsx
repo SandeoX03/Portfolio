@@ -1,8 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
-import { HiMail, HiLocationMarker, HiPaperAirplane } from "react-icons/hi";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import SectionWrapper, { SectionHeading } from "./SectionWrapper";
+import SectionWrapper from "./SectionWrapper";
 import { personalInfo } from "../data/portfolio";
 
 export default function Contact() {
@@ -20,79 +17,57 @@ export default function Contact() {
   };
 
   return (
-    <SectionWrapper id="contact" className="section-alt">
-      <SectionHeading
-        label="Contact"
-        title="Let's connect"
-        description="Whether it's a collaboration, internship opportunity, or just a friendly hello — I'd love to hear from you."
-      />
-
-      <div className="grid lg:grid-cols-2 gap-12">
-        <div className="space-y-8">
-          <p className="text-[#475569] leading-relaxed">
-            I'm currently open to internships, cybersecurity projects, and networking opportunities.
-            Based in Kathmandu and studying at Taylor's University in Malaysia — available for remote
-            collaboration worldwide.
+    <SectionWrapper id="contact" className="border-t border-[var(--color-line)]">
+      <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 min-w-0">
+        <div className="lg:col-span-5">
+          <p className="label-text mb-3">Contact</p>
+          <h2 className="font-serif text-[1.75rem] md:text-4xl font-medium tracking-tight text-[var(--color-ink)] leading-snug mb-6">
+            Let's build something useful.
+          </h2>
+          <p className="text-[var(--color-ink-2)] leading-relaxed mb-10">
+            Open to internships, cybersecurity projects, and conversations. Based in Kathmandu,
+            studying at Taylor's University — available for remote work.
           </p>
 
-          <div className="space-y-4">
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="card flex items-center gap-4 p-4 group !rounded-xl"
-            >
-              <div className="icon-box h-11 w-11 shrink-0">
-                <HiMail size={20} />
-              </div>
-              <div>
-                <p className="text-xs text-[#64748b] uppercase tracking-wider font-medium">Email</p>
-                <p className="text-sm text-[#0f172a] font-medium group-hover:text-[#1e40af] transition-colors">
-                  {personalInfo.email}
-                </p>
-              </div>
-            </a>
-
-            <div className="card-flat flex items-center gap-4 p-4">
-              <div className="icon-box h-11 w-11 shrink-0">
-                <HiLocationMarker size={20} />
-              </div>
-              <div>
-                <p className="text-xs text-[#64748b] uppercase tracking-wider font-medium">Location</p>
-                <p className="text-sm text-[#0f172a] font-medium">{personalInfo.location}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <a
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin size={20} />
-            </a>
-            <a
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              aria-label="GitHub"
-            >
-              <FaGithub size={20} />
-            </a>
-          </div>
+          <ul className="space-y-4 text-sm">
+            <li>
+              <span className="block label-text mb-1">Email</span>
+              <a href={`mailto:${personalInfo.email}`} className="text-link break-all">
+                {personalInfo.email}
+              </a>
+            </li>
+            <li>
+              <span className="block label-text mb-1">GitHub</span>
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link break-all"
+              >
+                github.com/SandeoX03
+              </a>
+            </li>
+            <li>
+              <span className="block label-text mb-1">LinkedIn</span>
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link break-all"
+              >
+                linkedin.com/in/sushant-tandukar
+              </a>
+            </li>
+            <li>
+              <span className="block label-text mb-1">Location</span>
+              <span className="text-[var(--color-ink)]">{personalInfo.location}</span>
+            </li>
+          </ul>
         </div>
 
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="card p-6 md:p-8 space-y-5"
-        >
+        <form onSubmit={handleSubmit} className="lg:col-span-7 space-y-8 min-w-0">
           <div>
-            <label htmlFor="name" className="block text-xs text-[#64748b] uppercase tracking-wider font-medium mb-2">
+            <label htmlFor="name" className="label-text block mb-2">
               Name
             </label>
             <input
@@ -107,7 +82,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-xs text-[#64748b] uppercase tracking-wider font-medium mb-2">
+            <label htmlFor="email" className="label-text block mb-2">
               Email
             </label>
             <input
@@ -117,12 +92,12 @@ export default function Contact() {
               value={formState.email}
               onChange={(e) => setFormState({ ...formState, email: e.target.value })}
               className="input-field"
-              placeholder="your@email.com"
+              placeholder="you@email.com"
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-xs text-[#64748b] uppercase tracking-wider font-medium mb-2">
+            <label htmlFor="message" className="label-text block mb-2">
               Message
             </label>
             <textarea
@@ -132,15 +107,14 @@ export default function Contact() {
               value={formState.message}
               onChange={(e) => setFormState({ ...formState, message: e.target.value })}
               className="input-field resize-none"
-              placeholder="Tell me about your project or opportunity..."
+              placeholder="What would you like to talk about?"
             />
           </div>
 
-          <button type="submit" className="btn-primary w-full justify-center">
-            <HiPaperAirplane />
-            {submitted ? "Opening email client..." : "Send Message"}
+          <button type="submit" className="btn-primary">
+            {submitted ? "Opening email client..." : "Send message"}
           </button>
-        </motion.form>
+        </form>
       </div>
     </SectionWrapper>
   );

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { navLinks } from "../data/portfolio";
+import { navLinks, personalInfo, sectionNavMap } from "../data/portfolio";
+
+const trackedSections = Object.keys(sectionNavMap);
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -10,21 +12,29 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 24);
 
-      const sections = navLinks.map((l) => l.id);
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.getBoundingClientRect().top <= 120) {
-          setActiveSection(sections[i]);
+      for (let i = trackedSections.length - 1; i >= 0; i--) {
+        const id = trackedSections[i];
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 110) {
+          setActiveSection(sectionNavMap[id] ?? id);
           break;
         }
       }
     };
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   const handleNav = (id: string) => {
     setMobileOpen(false);
@@ -32,95 +42,96 @@ export default function Navbar() {
   };
 
   return (
-    <motion.header
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "nav-blur" : "bg-transparent"
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
+        scrolled || mobileOpen
+          ? "bg-[var(--color-bg)] border-b border-[var(--color-line)]"
+          : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 sm:px-8 h-14">
         <button
           onClick={() => handleNav("home")}
-          className="flex items-center gap-2 font-bold text-lg text-[#0f172a] hover:text-[#1e40af] transition-colors"
+          className="font-serif text-[0.95rem] tracking-tight text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors shrink-0"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1e40af] text-white text-xs font-bold">
-            ST
-          </span>
-          <span className="hidden sm:inline text-sm font-semibold tracking-tight">
-            Sushant Tandukar
-          </span>
+          {personalInfo.name}
         </button>
 
-        <ul className="hidden lg:flex items-center gap-1">
+        <ul className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => (
             <li key={link.id}>
               <button
                 onClick={() => handleNav(link.id)}
-                className={`px-3.5 py-2 text-sm rounded-lg transition-all duration-200 ${
+                className={`text-[0.8125rem] tracking-wide transition-colors ${
                   activeSection === link.id
-                    ? "text-[#1e40af] bg-[#dbeafe] font-medium"
-                    : "text-[#64748b] hover:text-[#0f172a] hover:bg-[#f1f5f9]"
+                    ? "text-[var(--color-ink)]"
+                    : "text-[var(--color-ink-3)] hover:text-[var(--color-ink)]"
                 }`}
               >
                 {link.label}
               </button>
             </li>
           ))}
+          <li>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[0.8125rem] text-[var(--color-ink-3)] hover:text-[var(--color-ink)] transition-colors"
+            >
+              GitHub
+            </a>
+          </li>
         </ul>
 
         <button
-          onClick={() => handleNav("contact")}
-          className="hidden lg:inline-flex btn-primary !py-2 !px-5 !text-sm"
-        >
-          Get in Touch
-        </button>
-
-        <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-2xl text-[#475569]"
-          aria-label="Toggle menu"
+          className="md:hidden text-[var(--color-ink)] p-1"
+          aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
-          {mobileOpen ? <HiX /> : <HiMenuAlt3 />}
+          {mobileOpen ? <HiX size={22} /> : <HiMenuAlt3 size={22} />}
         </button>
       </nav>
 
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-[#e2e8f0] shadow-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden border-t border-[var(--color-line)] bg-[var(--color-bg)]"
           >
-            <ul className="flex flex-col px-6 py-4 gap-1">
+            <ul className="flex flex-col px-5 py-6 gap-1">
               {navLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => handleNav(link.id)}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-sm transition-colors ${
+                    className={`w-full text-left py-3 font-serif text-2xl ${
                       activeSection === link.id
-                        ? "text-[#1e40af] bg-[#dbeafe] font-medium"
-                        : "text-[#64748b]"
+                        ? "text-[var(--color-ink)]"
+                        : "text-[var(--color-ink-2)]"
                     }`}
                   >
                     {link.label}
                   </button>
                 </li>
               ))}
-              <li className="pt-2">
-                <button
-                  onClick={() => handleNav("contact")}
-                  className="w-full btn-primary justify-center"
+              <li>
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block py-3 font-serif text-2xl text-[var(--color-ink-2)]"
                 >
-                  Get in Touch
-                </button>
+                  GitHub
+                </a>
               </li>
             </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }
