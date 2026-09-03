@@ -34,12 +34,15 @@ export function SectionHeading({
 }) {
   return (
     <div className="mb-12 md:mb-16 max-w-2xl min-w-0">
-      <p className="label-text mb-3">{label}</p>
-      <h2 className="font-serif text-[1.75rem] md:text-4xl font-medium tracking-tight text-[var(--color-ink)] leading-snug">
+      <div className="inline-flex items-center gap-2 mb-3">
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        <p className="label-text">{label}</p>
+      </div>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-snug">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-[var(--color-ink-2)] leading-relaxed text-[0.975rem] md:text-base">
+        <p className="mt-3 text-slate-400 leading-relaxed text-sm sm:text-base">
           {description}
         </p>
       )}

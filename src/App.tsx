@@ -11,10 +11,10 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <>
+    <div className="ambient-bg min-h-screen text-slate-100 selection:bg-emerald-500/30 selection:text-white">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-[var(--color-ink)] focus:px-3 focus:py-2 focus:text-sm focus:text-[var(--color-bg)]"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-emerald-500 focus:px-4 focus:py-2 focus:text-xs focus:font-mono focus:font-semibold focus:text-slate-950 focus:rounded-md focus:shadow-xl focus:outline-none"
       >
         Skip to content
       </a>
@@ -30,6 +30,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ export const personalInfo = {
   subtitle: "AWS Cloud & Analytical Skills",
   location: "Kathmandu, Bagmati, Nepal",
   email: "sushanttandukar52@gmail.com",
-  linkedin: "https://linkedin.com/in/sushant-tandukar",
+  linkedin: "https://www.linkedin.com/in/sushant-tandukar-b415513a2/",
   github: "https://github.com/SandeoX03",
   tagline:
     "Computer Science student focused on cybersecurity, AWS cloud, and how systems actually hold up.",
@@ -57,37 +57,78 @@ export const skills = [
   },
 ];
 
-export const projects = [
+export interface ProjectItem {
+  title: string;
+  subtitle?: string;
+  description: string;
+  tags: string[];
+  status: string;
+  link: string;
+  isCapstone?: boolean;
+  teamScope?: string[];
+  individualContributions?: string[];
+}
+
+export const capstoneProject: ProjectItem = {
+  title: "Retinal Diseases Detection Project",
+  subtitle: "AI-Powered Medical Diagnostic Web Platform (Capstone Group Project)",
+  description:
+    "An AI-based diagnostic platform for early retinal disease detection. Developed as a collaborative capstone group project, with my focus dedicated to application security, user authentication, role-based access control, secure file uploads, audit logging, and testing.",
+  tags: [
+    "AI/ML",
+    "Web Development",
+    "Authentication",
+    "Authorization",
+    "Security",
+    "Input Validation",
+    "File Upload Security",
+    "Audit Logging",
+    "Testing",
+  ],
+  status: "Completed",
+  link: "#",
+  isCapstone: true,
+  teamScope: ["AI/ML Retinal Classification", "Diagnostic Workflow UI", "Web Platform Architecture"],
+  individualContributions: [
+    "Authentication & Authorization (RBAC)",
+    "Input Validation & File Upload Security",
+    "Audit Logging & Security Controls",
+    "Unit & Integration Testing",
+  ],
+};
+
+export const projects: ProjectItem[] = [
+  capstoneProject,
   {
-    title: "AWS Cloud Infrastructure Lab",
+    title: "MedEase",
     description:
-      "Hands-on cloud project deploying scalable web infrastructure on AWS using EC2, S3, and IAM. Implemented security best practices including least-privilege access and encrypted storage.",
-    tags: ["AWS", "EC2", "S3", "IAM"],
+      "A secure e-commerce platform designed to modernize Nepal's pharmaceutical sector, featuring medicine discovery, prescription management, and secure digital services.",
+    tags: ["MERN", "E-Commerce", "Healthcare", "Cybersecurity"],
     status: "Completed",
     link: "#",
   },
   {
-    title: "Advent of Cyber Challenges",
+    title: "NepaliVista",
     description:
-      "Completed the Advent of Cyber 2025 security challenge series, solving real-world scenarios spanning web exploitation, cryptography, forensics, and network analysis.",
-    tags: ["Cybersecurity", "CTF", "Forensics", "Cryptography"],
+      "A feature-rich JavaFX desktop application for managing Nepal's tourism ecosystem, including tourists, guides, attractions, bookings, and tourism-related operations.",
+    tags: ["Java", "JavaFX", "Desktop Application", "Tourism"],
+    status: "Completed",
+    link: "https://github.com/SandeoX03/NepalVista",
+  },
+  {
+    title: "Smart Grid Energy Distribution Optimization",
+    description:
+      "A machine learning and evolutionary computing project focused on optimizing energy distribution to improve efficiency and support smarter grid management.",
+    tags: ["Machine Learning", "Evolutionary Computing", "Optimization", "Energy"],
     status: "Completed",
     link: "#",
   },
   {
-    title: "Robotics Club Digital Presence",
+    title: "Wildfire Prediction and Risk Modelling",
     description:
-      "Designed and managed the social media strategy for V.S. Niketan Robotics Club — creating engaging content, growing student participation, and documenting club events across platforms.",
-    tags: ["Social Media", "Content Strategy", "Robotics", "Leadership"],
+      "A machine learning and parallel computing project focused on analyzing historical wildfire data to identify patterns and support wildfire prediction and risk assessment.",
+    tags: ["Machine Learning", "Parallel Computing", "Risk Modelling", "Data Analysis"],
     status: "Completed",
-    link: "#",
-  },
-  {
-    title: "Security Fundamentals Toolkit",
-    description:
-      "A collection of scripts and utilities for network scanning, log analysis, and vulnerability assessment — built while studying cybersecurity fundamentals at university.",
-    tags: ["Python", "Security", "Automation", "Networking"],
-    status: "In Progress",
     link: "#",
   },
 ];
@@ -146,11 +187,31 @@ export const certificates = [
 ];
 
 export const honors = [
+  "Google Skills Arcade Dialogue Design Badge — Google (Apr 2026)",
+  "Participant: Love at First Breach CTF Challenge — TryHackMe (Feb 2026)",
   "Dean's List — May 2025 Semester",
   "Dean's List — September 2024 Semester",
   "Social Media Manager Appreciation — Robotics Club",
   "Nepal Scouts: Progressive Advancement (BP Peak — Kanchanjunga)",
   "Participant, Future Forward — Putting Mindfulness into Action Workshop",
+];
+
+export const volunteering = [
+  {
+    role: "Volunteer",
+    organization: "Nepal Scouts (Kathmandu District Headquarters)",
+    category: "Arts and Culture",
+    events: [
+      {
+        title: "Haritalika Teej Service Camp 2019",
+        description: "Awarded a Certificate of Appreciation by Nepal Scouts, Kathmandu District Headquarters for active volunteer service during the festival camp.",
+      },
+      {
+        title: "Shravani Monday Service Camp",
+        description: "Received a Certificate of Appreciation for active participation and volunteer service during the Shravani Monday Service Camp.",
+      },
+    ],
+  },
 ];
 
 export const navLinks = [

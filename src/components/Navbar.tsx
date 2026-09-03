@@ -42,90 +42,101 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
-        scrolled || mobileOpen
-          ? "bg-[var(--color-bg)] border-b border-[var(--color-line)]"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 sm:px-8 h-14">
+    <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none">
+      <nav
+        className={`pointer-events-auto mx-auto flex max-w-4xl items-center justify-between gap-4 px-4 sm:px-6 py-2.5 rounded-full border transition-all duration-300 ${
+          scrolled || mobileOpen
+            ? "border-white/12 bg-slate-950/80 backdrop-blur-xl shadow-2xl shadow-black/60"
+            : "border-white/8 bg-slate-950/50 backdrop-blur-md shadow-lg shadow-black/30"
+        }`}
+      >
         <button
           onClick={() => handleNav("home")}
-          className="font-serif text-[0.95rem] tracking-tight text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors shrink-0"
+          className="flex items-center gap-2.5 font-sans font-semibold text-sm tracking-tight text-slate-100 hover:text-emerald-400 transition-colors shrink-0 group"
         >
-          {personalInfo.name}
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span className="group-hover:translate-x-0.5 transition-transform">{personalInfo.name}</span>
         </button>
 
-        <ul className="hidden md:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <button
-                onClick={() => handleNav(link.id)}
-                className={`text-[0.8125rem] tracking-wide transition-colors ${
-                  activeSection === link.id
-                    ? "text-[var(--color-ink)]"
-                    : "text-[var(--color-ink-3)] hover:text-[var(--color-ink)]"
-                }`}
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
-          <li>
+        <ul className="hidden md:flex items-center gap-1.5">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <li key={link.id}>
+                <button
+                  onClick={() => handleNav(link.id)}
+                  className={`relative px-3.5 py-1.5 text-xs font-mono tracking-wide font-medium rounded-full transition-all duration-200 ${
+                    isActive
+                      ? "text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 shadow-sm shadow-emerald-950/50"
+                      : "text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]"
+                  }`}
+                >
+                  {link.label}
+                </button>
+              </li>
+            );
+          })}
+          <li className="ml-2 pl-2 border-l border-white/10">
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[0.8125rem] text-[var(--color-ink-3)] hover:text-[var(--color-ink)] transition-colors"
+              className="glass-pill text-xs text-slate-300 hover:text-emerald-400 hover:border-emerald-500/30 transition-all"
             >
-              GitHub
+              GitHub ↗
             </a>
           </li>
         </ul>
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-[var(--color-ink)] p-1"
+          className="md:hidden text-slate-300 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors"
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
-          {mobileOpen ? <HiX size={22} /> : <HiMenuAlt3 size={22} />}
+          {mobileOpen ? <HiX size={20} /> : <HiMenuAlt3 size={20} />}
         </button>
       </nav>
 
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-[var(--color-line)] bg-[var(--color-bg)]"
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="pointer-events-auto md:hidden mt-2 mx-auto max-w-4xl rounded-2xl border border-white/10 bg-slate-950/90 backdrop-blur-2xl shadow-2xl p-4 overflow-hidden"
           >
-            <ul className="flex flex-col px-5 py-6 gap-1">
-              {navLinks.map((link) => (
-                <li key={link.id}>
-                  <button
-                    onClick={() => handleNav(link.id)}
-                    className={`w-full text-left py-3 font-serif text-2xl ${
-                      activeSection === link.id
-                        ? "text-[var(--color-ink)]"
-                        : "text-[var(--color-ink-2)]"
-                    }`}
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-              <li>
+            <ul className="flex flex-col gap-1">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <li key={link.id}>
+                    <button
+                      onClick={() => handleNav(link.id)}
+                      className={`w-full text-left px-4 py-2.5 rounded-xl font-mono text-sm tracking-wide transition-all ${
+                        isActive
+                          ? "bg-emerald-500/15 text-emerald-300 font-semibold border border-emerald-500/25"
+                          : "text-slate-300 hover:bg-white/5 hover:text-white"
+                      }`}
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                );
+              })}
+              <li className="pt-2 mt-1 border-t border-white/10">
                 <a
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block py-3 font-serif text-2xl text-[var(--color-ink-2)]"
+                  className="flex items-center justify-between px-4 py-2.5 rounded-xl font-mono text-sm text-slate-300 hover:bg-white/5 hover:text-emerald-400 transition-all"
                 >
-                  GitHub
+                  <span>GitHub</span>
+                  <span className="text-xs text-slate-500">github.com/SandeoX03</span>
                 </a>
               </li>
             </ul>
